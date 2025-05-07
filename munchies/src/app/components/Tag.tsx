@@ -1,5 +1,3 @@
-import { on } from "events";
-
 interface ITagProps {
     title: string;
     onClick?: () => void;

@@ -15,7 +15,7 @@ export default function Home() {
   const searchParams = useSearchParams();
 
   const [filters, setFilters] = useState<string[]>([]);
-  const [deliveryTimes, setDeliveryTimes] = useState<number[]>([]);
+  const [deliveryTimes, setDeliveryTimes] = useState<string[]>([]);
   const [priceRanges, setPriceRanges] = useState<string[]>([]);
 
   const [availableFilters, setAvailableFilters] = useState<Filter[]>([]);
@@ -30,7 +30,7 @@ export default function Home() {
     const priceParam = searchParams.get("priceRanges");
 
     setFilters(filterParam ? filterParam.split(",") : []);
-    setDeliveryTimes(deliveryParam ? deliveryParam.split(",").map(Number) : []);
+    setDeliveryTimes(deliveryParam ? deliveryParam.split(",") : []);
     setPriceRanges(priceParam ? priceParam.split(",") : []);
   }, [searchParams]);
 

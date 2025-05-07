@@ -8,17 +8,17 @@ type Props = {
   availablePriceRanges: { id: string; range: string }[];
   selectedFilters: string[];
   setFilters: (filters: string[]) => void;
-  selectedDeliveryTimes: number[];
-  setDeliveryTimes: (times: number[]) => void;
+  selectedDeliveryTimes: string[];
+  setDeliveryTimes: (times: string[]) => void;
   selectedPriceRanges: string[];
   setPriceRanges: (ranges: string[]) => void;
 };
 
 const deliveryOptions = [
-  { label: "0-10 min", value: 10 },
-  { label: "10-30 min", value: 30 },
-  { label: "30-60 min", value: 45 },
-  { label: "+1 hour", value: 60 },
+  { label: "0-10 min", value: "0-10" },
+  { label: "10-30 min", value: "10-30" },
+  { label: "30-60 min", value: "30-60" },
+  { label: "+1 hour", value: "60-null" },
 ];
 
 const FilterBar: React.FC<Props> = ({
@@ -39,7 +39,7 @@ const FilterBar: React.FC<Props> = ({
     );
   };
 
-  const toggleDeliveryTime = (value: number) => {
+  const toggleDeliveryTime = (value: string) => {
     setDeliveryTimes(
       selectedDeliveryTimes.includes(value)
         ? selectedDeliveryTimes.filter((v) => v !== value)

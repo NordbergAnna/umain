@@ -5,7 +5,7 @@ import RestaurantCard from "./RestaurantCard";
 
 interface RestaurantsListProps {
   filters: string[];
-  deliveryTimes: number[];
+  deliveryTimes: string[];
   priceRanges: string[];
 }
 
@@ -30,7 +30,12 @@ const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsLis
 
     if (deliveryTimes.length) {
       filtered = filtered.filter((r) =>
-        deliveryTimes.some((time) => r.delivery_time_minutes <= time)
+        deliveryTimes.some((range) => {
+          const [minStr, maxStr] = range.split("-");
+          const min = parseInt(minStr, 10);
+          const max = maxStr === "null" ? Infinity : parseInt(maxStr, 10);
+          return r.delivery_time_minutes >= min && r.delivery_time_minutes <= max;
+        })
       );
     }
 
@@ -44,11 +49,17 @@ const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsLis
   return (
     <div className="col-span-12 max-md:mt-6">
       <h1 className="text-display">Restaurant’s</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[17px] mt-5 md:mt-8">
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </div>
+      {restaurants.length === 0 ? (
+        <div className="grid grid-cols-12 items-center justify-center min-h-[300px]">
+            <p className="text-display col-span-6">Oops.. Looks like there's no food on the menu for these filters.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[17px] mt-5 md:mt-8">
+          {restaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
