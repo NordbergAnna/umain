@@ -32,7 +32,7 @@ const FilterSlider = ({ selectedFilters, setSelectedFilters }: Props) => {
     }
 
  return (
-    <div className="flex gap-x-2.5 overflow-x-scroll whitespace-nowrap hide-scrollbar">
+    <div className="flex gap-x-2.5 overflow-x-scroll whitespace-nowrap hide-scrollbar pr-[24px]">
     {filters.map((filter) => {
 
         const imageUrl = `${BASE_URL}${filter.image_url}`;
