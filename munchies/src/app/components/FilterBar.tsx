@@ -59,7 +59,7 @@ const FilterBar: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col mb-6 md:p-6 md:bg-white md:rounded-[10px] md:border border-stroke h-screen">
+    <div className="flex flex-col mb-6 md:p-6 md:bg-white md:rounded-[10px] md:border border-stroke md:h-screen">
       <h2 className="hidden md:block text-h1 pb-8">Filter</h2>
 
       <div className="hidden md:block md:pb-8">

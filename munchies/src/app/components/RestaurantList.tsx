@@ -54,7 +54,7 @@ const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsLis
             <p className="text-display col-span-6">Oops.. Looks like there's no food on the menu for these filters.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[17px] mt-5 md:mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[17px] mt-5 md:mt-8">
           {restaurants.map((restaurant) => (
             <RestaurantCard key={restaurant.id} restaurant={restaurant} />
           ))}

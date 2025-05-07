@@ -62,7 +62,7 @@ export default function Home() {
 
   return (
     <main className="bg-offWhite">
-      <div className="md:pl-10 md:pt-14 px-6">
+      <div className="md:pl-10 md:pt-14 pl-6">
         <div className="block md:grid grid-cols-16 gap-x-5">
           <div className="col-span-3">
             <FilterBar
@@ -79,7 +79,10 @@ export default function Home() {
           <div className="col-span-13">
             <div className="md:grid grid-cols-13 gap-y-10">
               <div className="col-span-13">
-                <FilterSlider />
+              <FilterSlider
+                selectedFilters={filters}
+                setSelectedFilters={setFilters}
+              />
               </div>
               <div className="col-span-12">
               <RestaurantList
