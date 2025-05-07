@@ -47,7 +47,7 @@ const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsLis
   }, [filters, deliveryTimes, priceRanges, allRestaurants]);
 
   return (
-    <div className="col-span-12 max-md:mt-6">
+    <div className="col-span-12 max-md:pr-6 max-md:pb-[40px] max-md:mt-6">
       <h1 className="text-display">Restaurant’s</h1>
       {restaurants.length === 0 ? (
         <div className="grid grid-cols-12 items-center justify-center min-h-[300px]">

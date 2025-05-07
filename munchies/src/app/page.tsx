@@ -10,6 +10,7 @@ import { Filter } from "./types";
 import FilterBar from "./components/FilterBar";
 import RestaurantList from "./components/RestaurantList";
 import FilterSlider from "./components/FilterSlider";
+import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
@@ -62,36 +63,46 @@ export default function Home() {
 
   return (
     <main className="bg-offWhite">
-      <div className="md:pl-10 md:pt-14 pl-6">
+      <div className="pl-6 pt-[40px] md:pl-10 md:pt-14">
+        <span className="block h-fit pb-[24px] md:pb-[48px]">
+          <Image
+            src="/icons/logo_black.svg"
+            alt="Logo"
+            fill
+            className="!h-[24px] md:!h-[40px] !w-auto !relative object-contain"
+            priority
+          />
+        </span>
+
         <div className="block md:grid grid-cols-16 gap-x-5">
           <div className="col-span-3">
-            <FilterBar
-              availableFilters={availableFilters}
-              availablePriceRanges={availablePriceRanges}
-              selectedFilters={filters}
-              setFilters={setFilters}
-              selectedDeliveryTimes={deliveryTimes}
-              setDeliveryTimes={setDeliveryTimes}
-              selectedPriceRanges={priceRanges}
-              setPriceRanges={setPriceRanges}
-            />
+        <FilterBar
+          availableFilters={availableFilters}
+          availablePriceRanges={availablePriceRanges}
+          selectedFilters={filters}
+          setFilters={setFilters}
+          selectedDeliveryTimes={deliveryTimes}
+          setDeliveryTimes={setDeliveryTimes}
+          selectedPriceRanges={priceRanges}
+          setPriceRanges={setPriceRanges}
+        />
           </div>
           <div className="col-span-13">
-            <div className="md:grid grid-cols-13 gap-y-10">
-              <div className="col-span-13">
-              <FilterSlider
-                selectedFilters={filters}
-                setSelectedFilters={setFilters}
-              />
-              </div>
-              <div className="col-span-12">
-              <RestaurantList
-                filters={filters}
-                deliveryTimes={deliveryTimes}
-                priceRanges={priceRanges}
-              />
-              </div>
-            </div>
+        <div className="md:grid grid-cols-13 gap-y-10">
+          <div className="col-span-13">
+            <FilterSlider
+          selectedFilters={filters}
+          setSelectedFilters={setFilters}
+            />
+          </div>
+          <div className="col-span-12">
+            <RestaurantList
+          filters={filters}
+          deliveryTimes={deliveryTimes}
+          priceRanges={priceRanges}
+            />
+          </div>
+        </div>
           </div>
         </div>
       </div>
