@@ -32,7 +32,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   }, [restaurant.id]);
 
   return (
-    <div className="flex flex-col justify-between bg-white relative min-h-[200px] rounded-[8px] border border-stroke">
+    <div className="relative overflow-hidden flex flex-col justify-between bg-white relative min-h-[200px] rounded-[8px] border border-stroke">
         {!isOpen && (
             <div className="absolute inset-0 bg-white opacity-90 z-20 flex items-center justify-center">
                 <div className="z-30 py-2 px-3 bg-offWhite border border-stroke rounded-[4px] text-body">Opens {openTime}</div>
@@ -42,7 +42,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
             <Tag title={isOpen ? "Open" : "Closed"} className="py-2 px-3 rounded-[88px]" />
             <Tag title={restaurant.delivery_time_minutes + " min"} className="py-2 px-3 rounded-[88px]" />
         </span>
-      <span className="absolute top-0 right-0 z-10">
+      <span className="absolute top-[-28px] right-[-28px] z-10">
         <Image
           src={imageUrl}
           alt={restaurant.name}
