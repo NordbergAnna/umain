@@ -10,7 +10,7 @@ const Tag = ({ title, onClick, className }: ITagProps) => {
     return (
         <TagElement
         onClick={onClick}
-        className={`py-2 px-3 text-body rounded-[88px] border border-stroke w-fit flex items-center z-30 ${className}`}>
+        className={`text-body border-[0.6px] border-stroke w-fit flex items-center z-30 ${className}`}>
             {(title === "Open" || title === "Closed") && (
                 <span className={`h-2 w-2 flex rounded-full mr-1 ${title === "Open" ? "bg-green" : "bg-black"}`}></span>
             )}

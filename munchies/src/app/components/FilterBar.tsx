@@ -21,6 +21,9 @@ const deliveryOptions = [
   { label: "+1 hour", value: "60-null" },
 ];
 
+const filterClass = "py-[8px] px-[12px] text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
+const selectedFilterClass = "bg-black text-white";
+
 const FilterBar: React.FC<Props> = ({
   availableFilters,
   availablePriceRanges,
@@ -56,20 +59,18 @@ const FilterBar: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex flex-col mb-6 md:p-6 md:bg-white md:rounded-[10px] md:border border-stroke">
+    <div className="flex flex-col mb-6 md:p-6 md:bg-white md:rounded-[10px] md:border border-stroke h-screen">
       <h2 className="hidden md:block text-h1 pb-8">Filter</h2>
 
-      <div className="md:pb-8">
+      <div className="hidden md:block md:pb-8">
         <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Food category</h3>
-        <div className="hidden md:block">
+        <div className="block">
           {availableFilters.slice(0, 4).map((filter) => (
             <Tag
               key={filter.id}
               title={filter.name}
               onClick={() => toggleFilter(filter.id)}
-              className={`cursor-pointer md:mb-2.5 ${
-                selectedFilters.includes(filter.id) ? "bg-black text-white" : ""
-              }`}
+              className={`${filterClass} ${selectedFilters.includes(filter.id) ? selectedFilterClass : ""} md:mb-2.5`}
             />
           ))}
         </div>
@@ -83,25 +84,21 @@ const FilterBar: React.FC<Props> = ({
               key={option.value}
               title={option.label}
               onClick={() => toggleDeliveryTime(option.value)}
-              className={`cursor-pointer md:mb-2.5 ${
-                selectedDeliveryTimes.includes(option.value) ? "bg-black text-white" : ""
-              }`}
+              className={`${filterClass} ${selectedDeliveryTimes.includes(option.value) ? selectedFilterClass : ""}`}
             />
           ))}
         </div>
       </div>
 
-      <div className="md:pb-8">
+      <div className="hidden md:block md:pb-8">
         <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Price range</h3>
-        <div className="hidden md:flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap">
           {availablePriceRanges.map((range) => (
             <Tag
               key={range.id}
               title={range.range}
               onClick={() => togglePriceRange(range.id)}
-              className={`cursor-pointer md:mb-2.5 ${
-                selectedPriceRanges.includes(range.id) ? "bg-black text-white" : ""
-              }`}
+              className={`${filterClass} ${selectedPriceRanges.includes(range.id) ? selectedFilterClass : ""}`}
             />
           ))}
         </div>

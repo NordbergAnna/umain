@@ -39,8 +39,8 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
             </div>
         )}
         <span className="pt-4 pl-4 flex gap-x-2">
-            <Tag title={isOpen ? "Open" : "Closed"} />
-            <Tag title={restaurant.delivery_time_minutes + " min"} />
+            <Tag title={isOpen ? "Open" : "Closed"} className="py-2 px-3 rounded-[88px]" />
+            <Tag title={restaurant.delivery_time_minutes + " min"} className="py-2 px-3 rounded-[88px]" />
         </span>
       <span className="absolute top-0 right-0 z-10">
         <Image

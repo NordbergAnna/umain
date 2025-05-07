@@ -9,6 +9,7 @@ import {
 import { Filter } from "./types";
 import FilterBar from "./components/FilterBar";
 import RestaurantList from "./components/RestaurantList";
+import FilterSlider from "./components/FilterSlider";
 
 export default function Home() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-offWhite h-screen">
+    <main className="bg-offWhite">
       <div className="md:pl-10 md:pt-14 px-6">
         <div className="block md:grid grid-cols-16 gap-x-5">
           <div className="col-span-3">
@@ -78,13 +79,15 @@ export default function Home() {
           <div className="col-span-13">
             <div className="md:grid grid-cols-13 gap-y-10">
               <div className="col-span-13">
-                {/* <FilterSlider /> */}
+                <FilterSlider />
               </div>
+              <div className="col-span-12">
               <RestaurantList
                 filters={filters}
                 deliveryTimes={deliveryTimes}
                 priceRanges={priceRanges}
               />
+              </div>
             </div>
           </div>
         </div>
