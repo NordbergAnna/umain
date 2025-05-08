@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Tag from "../Tag";
 import type { FilterBarProps } from "../../types";
 
@@ -13,7 +12,7 @@ const deliveryOptions = [
 const filterClass = "py-[8px] px-[12px] text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
 const selectedFilterClass = "bg-black text-white";
 
-const FilterBar: React.FC<FilterBarProps> = ({
+const FilterBar = ({
   availableFilters,
   availablePriceRanges,
   selectedFoodCategories,
@@ -22,7 +21,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
   setDeliveryTimes,
   selectedPriceRanges,
   setPriceRanges,
-}) => {
+}: FilterBarProps) => {
   const toggleFilter = (id: string) => {
     setFoodCategories(
       selectedFoodCategories.includes(id)

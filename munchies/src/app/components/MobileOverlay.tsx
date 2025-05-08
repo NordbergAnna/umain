@@ -26,7 +26,6 @@ const MobileOverlay = () => {
     };
 
     useEffect(() => { 
-
         setIsClient(true);
 
         if (isClient && !hasSeenOverlay()) {

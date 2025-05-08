@@ -1,31 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import FilterBar from "./components/Filter/FilterBar";
 import RestaurantList from "./components/Restaurant/RestaurantList";
 import FilterSlider from "./components/Filter/FilterSlider";
 import Image from "next/image";
 import useFilters from "./hooks/useFilters";
+import useSyncFiltersWithURL from "./hooks/useSyncFiltersWithUrl";
 import useData from "./hooks/useData";
 import MobileOverlay from "./components/MobileOverlay";
 
 export default function Home() {
-  const { foodCategories, setFoodCategories, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges } = useFilters();
+  const { 
+    foodCategories, 
+    setFoodCategories, 
+    deliveryTimes, 
+    setDeliveryTimes, 
+    priceRanges, 
+    setPriceRanges 
+  } = useFilters();
+
   const { availableFilters, availablePriceRanges } = useData();
 
-  const router = useRouter();
- 
-  useEffect(() => {
-    const params = new URLSearchParams();
-
-    if (foodCategories.length) params.set("foodCategories", foodCategories.join(","));
-    if (deliveryTimes.length) params.set("deliveryTimes", deliveryTimes.join(","));
-    if (priceRanges.length) params.set("priceRanges", priceRanges.join(","));
-
-    const queryString = params.toString();
-    router.replace(`?${queryString}`, { scroll: false });
-  }, [foodCategories, deliveryTimes, priceRanges, router]);
+  useSyncFiltersWithURL({ foodCategories, deliveryTimes, priceRanges });
 
   return (
     <main className="bg-offWhite">
