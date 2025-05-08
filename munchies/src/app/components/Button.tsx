@@ -13,7 +13,7 @@ const Button = ({ primary, text, onClick, className }: IButtonProps) => {
             onClick={onClick}
             className={`
             ${primary ? "bg-green text-white" : "bg-transparent text-white border border-white"} 
-            rounded-[8px] py-5 px-6 font-bold font-primary text-[16px] leading-[1] cursor-pointer
+            rounded-lg py-5 px-6 font-bold font-primary text-[16px] leading-[1] cursor-pointer
             ${className} 
             `}
         >

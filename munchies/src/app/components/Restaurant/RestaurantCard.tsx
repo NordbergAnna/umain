@@ -37,7 +37,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   }, [restaurant.id]); // Runs when the restaurant.id changes
 
   return (
-    <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-52 rounded-[8px] border border-stroke">
+    <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-52 rounded-lg border border-stroke">
         {!isOpen && (
             <div className="absolute inset-0 bg-white opacity-90 z-20 flex items-center justify-center">
                 <div className="z-30 py-2 px-3 bg-offWhite border border-stroke rounded-[4px] text-body">Opens tomorrow at 12 pm</div>

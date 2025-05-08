@@ -39,7 +39,7 @@ const FilterSlider = ({ selectedFoodCategories, setFoodCategories }: FilterSlide
 
         return (
             <button
-                className={`flex justify-between min-w-[160px] h-20 bg-white border border-stroke rounded-[8px] cursor-pointer transition-opacity duration-100 ${isAnySelected && !isSelected ? "opacity-50" : "opacity-100"}`}
+                className={`flex justify-between min-w-40 h-20 bg-white border border-stroke rounded-lg cursor-pointer transition-opacity duration-100 ${isAnySelected && !isSelected ? "opacity-50" : "opacity-100"}`}
                 key={category.id}
                 onClick={() => toggleFilter(category.id)}
                 >

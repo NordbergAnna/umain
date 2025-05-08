@@ -3,7 +3,7 @@ import Tag from "../Tag";
 import type { FilterBarProps } from "../../types";
 import { deliveryOptions } from "@/app/lib/constants";
 
-const filterClass = "py-2 px-3 text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
+const filterClass = "py-2 px-3 text-body rounded-lg border-[0.6px] border-stroke cursor-pointer";
 const selectedFilterClass = "bg-black text-white";
 
 /** FilterBar component definition */
