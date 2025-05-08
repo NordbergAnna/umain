@@ -3,6 +3,7 @@ import { Restaurant } from "../../types";
 import { useState, useEffect } from "react";
 import { fetchOpenStatus } from "../../lib/api";
 import Tag from "../Tag";
+import { deliveryOptions } from "../../lib/constants";
 
 const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base URL for image paths
 
@@ -10,6 +11,14 @@ const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base U
 const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   const imageUrl = `${BASE_URL}${restaurant.image_url}`; // Constructs the full URL for the image
   const [isOpen, setIsOpen] = useState<boolean | null>(null); // State to track whether the restaurant is open or not
+
+  // Function to get the delivery time label based on the delivery time in minutes
+  const getDeliveryTimeLabel = (minutes: number): string => {
+    const option = deliveryOptions.find(opt => 
+      minutes >= opt.min && (opt.max === null || minutes <= opt.max)
+    );
+    return option ? option.label : `${minutes} min`;
+  };
 
   // useEffect hook to check the restaurant's open status when the component mounts
   useEffect(() => {
@@ -36,7 +45,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
         )}
         <span className="pt-4 pl-4 flex gap-x-2">
             <Tag title={isOpen ? "Open" : "Closed"} className="py-2 px-3 rounded-[88px]" />
-            <Tag title={restaurant.delivery_time_minutes + " min"} className="py-2 px-3 rounded-[88px]" />
+            <Tag title={getDeliveryTimeLabel(restaurant.delivery_time_minutes)} className="py-2 px-3 rounded-[88px]" />
         </span>
       <span className="absolute top-[-28px] right-[-28px] z-10">
         <Image

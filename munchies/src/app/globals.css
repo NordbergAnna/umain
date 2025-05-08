@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAFAFA;
+  --background: #ededed;
   --foreground: #000000;
 }
 
@@ -22,13 +22,6 @@
   --color-stroke: rgba(0, 0, 0, 0.1);
 
   --font-primary: 'SF Pro', sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

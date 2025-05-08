@@ -1,14 +1,7 @@
 "use client";
 import Tag from "../Tag";
 import type { FilterBarProps } from "../../types";
-
-// Predefined delivery time options
-const deliveryOptions = [
-  { label: "0-10 min", value: "0-10" },
-  { label: "10-30 min", value: "10-30" },
-  { label: "30-60 min", value: "30-60" },
-  { label: "+1 hour", value: "60-null" },
-];
+import { deliveryOptions } from "@/app/lib/constants";
 
 const filterClass = "py-2 px-3 text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
 const selectedFilterClass = "bg-black text-white";
