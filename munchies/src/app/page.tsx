@@ -10,7 +10,7 @@ import useData from "./hooks/useData";
 import MobileOverlay from "./components/MobileOverlay";
 
 export default function Home() {
-  // Destructure the states and setters from the `useFilters` hook
+  // Initialize filter states and their setter functions
   const { 
     foodCategories, 
     setFoodCategories, 
