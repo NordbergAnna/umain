@@ -25,7 +25,7 @@ export default function Home() {
   useSyncFiltersWithURL({ foodCategories, deliveryTimes, priceRanges }); // Synchronize the filter states with the URL query parameters
 
   return (
-    <main className="bg-offWhite">
+    <main className="bg-offWhite fade-in">
       <MobileOverlay />
       <div className="pl-6 pt-[40px] md:pl-10 md:pt-14">
         <span className="block h-fit pb-6 md:pb-12">

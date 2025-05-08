@@ -9,13 +9,15 @@ import type { RestaurantsListProps } from "../../types";
 const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: RestaurantsListProps) => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]); // State to store the filtered restaurants after applying the filters
   const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]); // State to store the full list of restaurants fetched from the API
+  const [loading, setLoading] = useState(true); // State to manage loading status
 
   // Fetch the list of restaurants when the component mounts
   useEffect(() => {
     const loadRestaurants = async () => {
-      // Fetch the restaurant data from the API and update the state
-      const resList = await fetchRestaurants();
+      setLoading(true); // Set loading to true while fetching
+      const resList = await fetchRestaurants(); // Fetch the restaurant data from the API and update the state
       setAllRestaurants(resList);
+      setLoading(false); // Set loading to false after fetching
     };
     loadRestaurants(); // Trigger the async function to load restaurants
   }, []); // Empty dependency array to ensure this runs only once when the component mounts
@@ -29,7 +31,7 @@ const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: Restaur
   return (
     <div className="col-span-12 max-md:pr-6 max-md:pb-10 max-md:mt-6">
       <h1 className="text-display">Restaurant’s</h1>
-      {restaurants.length === 0 ? (
+      {!loading && restaurants.length === 0 ? (
         <div className="grid grid-cols-12 items-center justify-center min-h-[300px]">
             <p className="text-display col-span-6">Oops.. Looks like there's no food on the menu for these filters.</p>
         </div>
