@@ -6,7 +6,11 @@ import { filterRestaurants } from "@/app/hooks/filterUtils";
 import type { RestaurantsListProps } from "../../types";
 
 /** Functional component to display a list of restaurants based on filters */
-const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: RestaurantsListProps) => {
+const RestaurantsList = ({
+  foodCategories,
+  deliveryTimes,
+  priceRanges,
+}: RestaurantsListProps) => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]); // State to store the filtered restaurants after applying the filters
   const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]); // State to store the full list of restaurants fetched from the API
   const [loading, setLoading] = useState(true); // State to manage loading status
@@ -24,7 +28,12 @@ const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: Restaur
 
   // Filter the list of all restaurants whenever any of the filters change
   useEffect(() => {
-    const filtered = filterRestaurants(allRestaurants, foodCategories, deliveryTimes, priceRanges);  // Apply the filters to the full list of restaurants
+    const filtered = filterRestaurants(
+      allRestaurants,
+      foodCategories,
+      deliveryTimes,
+      priceRanges
+    ); // Apply the filters to the full list of restaurants
     setRestaurants(filtered); // Update the restaurants state with the filtered list
   }, [foodCategories, deliveryTimes, priceRanges, allRestaurants]); // Runs when filters or the list of all restaurants change
 
@@ -33,7 +42,9 @@ const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: Restaur
       <h1 className="text-display">Restaurant’s</h1>
       {!loading && restaurants.length === 0 ? (
         <div className="grid grid-cols-12 items-center justify-center min-h-[300px]">
-            <p className="text-display col-span-6">Oops.. Looks like there's no food on the menu for these filters.</p>
+          <p className="text-display col-span-6">
+            Oops.. Looks like there's no food on the menu for these filters.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[17px] mt-5 md:mt-8">

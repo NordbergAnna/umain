@@ -1,10 +1,11 @@
 import { Restaurant, Filter } from "../types/index";
-import { BASE_URL } from '../../../config'; // Get the Base url from config with api path
+import { BASE_URL } from "../../../config"; // Get the Base url from config with api path
 
 /** Fetch the full list of restaurants from the API */
 export const fetchRestaurants = async (): Promise<Restaurant[]> => {
   const res = await fetch(`${BASE_URL}/restaurants`);
-  if (!res.ok) { // Throw an error if the request fails
+  if (!res.ok) {
+    // Throw an error if the request fails
     throw new Error("Failed to fetch restaurants");
   }
   const data = await res.json();
@@ -23,16 +24,13 @@ export const fetchFilters = async (): Promise<Filter[]> => {
 
 /** Fetch open/closed status of a specific restaurant by ID */
 export const fetchOpenStatus = async (restaurantId: string) => {
-    const res = await fetch(
-      `${BASE_URL}/open/${restaurantId}`
-    );
-    if (!res.ok) {
-      throw new Error("Failed to fetch open status");
-    }
-    const data = await res.json();
-    return data; // Expected to return an object like { isOpen: true }
-  };
-  
+  const res = await fetch(`${BASE_URL}/open/${restaurantId}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch open status");
+  }
+  const data = await res.json();
+  return data; // Expected to return an object like { isOpen: true }
+};
 
 /** Fetch all unique price ranges based on restaurant data */
 export const fetchAllPriceRanges = async (): Promise<

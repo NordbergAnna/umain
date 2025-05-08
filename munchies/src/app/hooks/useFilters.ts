@@ -13,7 +13,7 @@ const useFilters = () => {
   // Effect that runs whenever the URL search parameters change
   useEffect(() => {
     // Extract query params for each filter type
-    const categoryParam = searchParams.get("foodCategories")
+    const categoryParam = searchParams.get("foodCategories");
     const deliveryParam = searchParams.get("deliveryTimes");
     const priceParam = searchParams.get("priceRanges");
 
@@ -24,13 +24,13 @@ const useFilters = () => {
   }, [searchParams]); // Re-run when search parameters change
 
   // Return both the values and their setters so they can be used and updated externally
-  return { 
-    foodCategories, 
-    setFoodCategories, 
-    deliveryTimes, 
-    setDeliveryTimes, 
-    priceRanges, 
-    setPriceRanges 
+  return {
+    foodCategories,
+    setFoodCategories,
+    deliveryTimes,
+    setDeliveryTimes,
+    priceRanges,
+    setPriceRanges,
   };
 };
 

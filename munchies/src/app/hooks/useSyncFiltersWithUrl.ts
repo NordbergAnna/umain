@@ -18,13 +18,14 @@ const useSyncFiltersWithURL = ({
     const params = new URLSearchParams(); // Create a new URLSearchParams instance to build the query string
 
     // Only include parameters in the URL if their arrays are non-empty
-    if (foodCategories.length) params.set("foodCategories", foodCategories.join(","));
-    if (deliveryTimes.length) params.set("deliveryTimes", deliveryTimes.join(","));
+    if (foodCategories.length)
+      params.set("foodCategories", foodCategories.join(","));
+    if (deliveryTimes.length)
+      params.set("deliveryTimes", deliveryTimes.join(","));
     if (priceRanges.length) params.set("priceRanges", priceRanges.join(","));
 
     const queryString = params.toString(); // Convert params object to a query string
     router.replace(`?${queryString}`, { scroll: false }); // Replace the current URL with the new query string, but don't scroll the page up
-
   }, [foodCategories, deliveryTimes, priceRanges, router]); // Effect dependency array ensures this runs when any of the filter arrays change
 };
 

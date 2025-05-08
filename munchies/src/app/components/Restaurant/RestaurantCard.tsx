@@ -14,8 +14,8 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
 
   // Function to get the delivery time label based on the delivery time in minutes
   const getDeliveryTimeLabel = (minutes: number): string => {
-    const option = deliveryOptions.find(opt => 
-      minutes >= opt.min && (opt.max === null || minutes <= opt.max)
+    const option = deliveryOptions.find(
+      (opt) => minutes >= opt.min && (opt.max === null || minutes <= opt.max)
     );
     return option ? option.label : `${minutes} min`;
   };
@@ -23,30 +23,38 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
   // useEffect hook to check the restaurant's open status when the component mounts
   useEffect(() => {
     const checkOpenStatus = async () => {
-        try {
-          const status = await fetchOpenStatus(restaurant.id); // Fetches the open status from the API
-          if (status) {
-            setIsOpen(status.is_open); // Sets the state based on the fetched status
-          }
-        } catch (error) {
-          console.error("Error fetching open status:", error); // Handles any errors in the fetching process
-          setIsOpen(false); // If there’s an error, assume the restaurant is closed
+      try {
+        const status = await fetchOpenStatus(restaurant.id); // Fetches the open status from the API
+        if (status) {
+          setIsOpen(status.is_open); // Sets the state based on the fetched status
         }
-      };
-      checkOpenStatus();
+      } catch (error) {
+        console.error("Error fetching open status:", error); // Handles any errors in the fetching process
+        setIsOpen(false); // If there’s an error, assume the restaurant is closed
+      }
+    };
+    checkOpenStatus();
   }, [restaurant.id]); // Runs when the restaurant.id changes
 
   return (
     <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-52 rounded-lg border border-stroke">
-        {!isOpen && (
-            <div className="absolute inset-0 bg-white opacity-90 z-20 flex items-center justify-center">
-                <div className="z-30 py-2 px-3 bg-offWhite border border-stroke rounded-[4px] text-body">Opens tomorrow at 12 pm</div>
-            </div>
-        )}
-        <span className="pt-4 pl-4 flex gap-x-2">
-            <Tag title={isOpen ? "Open" : "Closed"} className="py-2 px-3 rounded-[88px]" />
-            <Tag title={getDeliveryTimeLabel(restaurant.delivery_time_minutes)} className="py-2 px-3 rounded-[88px]" />
-        </span>
+      {!isOpen && (
+        <div className="absolute inset-0 bg-white opacity-90 z-20 flex items-center justify-center">
+          <div className="z-30 py-2 px-3 bg-offWhite border border-stroke rounded-[4px] text-body">
+            Opens tomorrow at 12 pm
+          </div>
+        </div>
+      )}
+      <span className="pt-4 pl-4 flex gap-x-2">
+        <Tag
+          title={isOpen ? "Open" : "Closed"}
+          className="py-2 px-3 rounded-[88px]"
+        />
+        <Tag
+          title={getDeliveryTimeLabel(restaurant.delivery_time_minutes)}
+          className="py-2 px-3 rounded-[88px]"
+        />
+      </span>
       <span className="absolute top-[-28px] right-[-28px] z-10">
         <Image
           src={imageUrl}
@@ -55,10 +63,13 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
           width={140}
           className="rounded-lg"
         />
-        </span>
+      </span>
       <div className="flex justify-between items-center px-4 pb-4 text-h1">
-        {restaurant.name} <span><img src="/icons/CTA.svg"/></span>
-        </div>
+        {restaurant.name}{" "}
+        <span>
+          <img src="/icons/CTA.svg" />
+        </span>
+      </div>
     </div>
   );
 };
