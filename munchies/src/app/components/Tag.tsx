@@ -4,8 +4,9 @@ interface ITagProps {
     className?: string;
 }
 
+/** Functional component for displaying a tag that can optionally act as a button */
 const Tag = ({ title, onClick, className }: ITagProps) => {
-    const TagElement = onClick ? "button" : "div";
+    const TagElement = onClick ? "button" : "div"; // Determine the HTML element to use: <button> if clickable, otherwise <div>
 
     return (
         <TagElement

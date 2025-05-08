@@ -5,25 +5,29 @@ import RestaurantCard from "./RestaurantCard";
 import { filterRestaurants } from "@/app/hooks/filterUtils";
 import type { RestaurantsListProps } from "../../types";
 
+/** Functional component to display a list of restaurants based on filters */
 const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: RestaurantsListProps) => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]); // State to store the filtered restaurants after applying the filters
+  const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]); // State to store the full list of restaurants fetched from the API
 
+  // Fetch the list of restaurants when the component mounts
   useEffect(() => {
     const loadRestaurants = async () => {
+      // Fetch the restaurant data from the API and update the state
       const resList = await fetchRestaurants();
       setAllRestaurants(resList);
     };
-    loadRestaurants();
-  }, []);
+    loadRestaurants(); // Trigger the async function to load restaurants
+  }, []); // Empty dependency array to ensure this runs only once when the component mounts
 
+  // Filter the list of all restaurants whenever any of the filters change
   useEffect(() => {
-    const filtered = filterRestaurants(allRestaurants, foodCategories, deliveryTimes, priceRanges);
-    setRestaurants(filtered);
-  }, [foodCategories, deliveryTimes, priceRanges, allRestaurants]);
+    const filtered = filterRestaurants(allRestaurants, foodCategories, deliveryTimes, priceRanges);  // Apply the filters to the full list of restaurants
+    setRestaurants(filtered); // Update the restaurants state with the filtered list
+  }, [foodCategories, deliveryTimes, priceRanges, allRestaurants]); // Runs when filters or the list of all restaurants change
 
   return (
-    <div className="col-span-12 max-md:pr-6 max-md:pb-[40px] max-md:mt-6">
+    <div className="col-span-12 max-md:pr-6 max-md:pb-10 max-md:mt-6">
       <h1 className="text-display">Restaurant’s</h1>
       {restaurants.length === 0 ? (
         <div className="grid grid-cols-12 items-center justify-center min-h-[300px]">

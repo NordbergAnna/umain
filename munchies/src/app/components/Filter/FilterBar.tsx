@@ -2,6 +2,7 @@
 import Tag from "../Tag";
 import type { FilterBarProps } from "../../types";
 
+// Predefined delivery time options
 const deliveryOptions = [
   { label: "0-10 min", value: "0-10" },
   { label: "10-30 min", value: "10-30" },
@@ -9,9 +10,10 @@ const deliveryOptions = [
   { label: "+1 hour", value: "60-null" },
 ];
 
-const filterClass = "py-[8px] px-[12px] text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
+const filterClass = "py-2 px-3 text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
 const selectedFilterClass = "bg-black text-white";
 
+/** FilterBar component definition */
 const FilterBar = ({
   availableFilters,
   availablePriceRanges,
@@ -22,22 +24,25 @@ const FilterBar = ({
   selectedPriceRanges,
   setPriceRanges,
 }: FilterBarProps) => {
+  /** Toggles selection for a food category */
   const toggleFilter = (id: string) => {
     setFoodCategories(
       selectedFoodCategories.includes(id)
-        ? selectedFoodCategories.filter((f) => f !== id)
-        : [...selectedFoodCategories, id]
+        ? selectedFoodCategories.filter((f) => f !== id) // Remove if already selected
+        : [...selectedFoodCategories, id] // Add if not selected
     );
   };
 
+  /** Toggles selection for a delivery time */
   const toggleDeliveryTime = (value: string) => {
     setDeliveryTimes(
       selectedDeliveryTimes.includes(value)
-        ? selectedDeliveryTimes.filter((v) => v !== value)
+        ? selectedDeliveryTimes.filter((v) => v !== value) 
         : [...selectedDeliveryTimes, value]
     );
   };
 
+  /** Toggles selection for a price range */
   const togglePriceRange = (id: string) => {
     setPriceRanges(
       selectedPriceRanges.includes(id)
@@ -49,7 +54,6 @@ const FilterBar = ({
   return (
     <div className="flex flex-col mb-6 md:p-6 md:bg-white md:rounded-[10px] md:border border-stroke md:h-screen">
       <h2 className="hidden md:block text-h1 pb-8">Filter</h2>
-
       <div className="hidden md:block md:pb-8">
         <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Food category</h3>
         <div className="block">
@@ -65,7 +69,7 @@ const FilterBar = ({
       </div>
 
       <div className="md:pb-8">
-        <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Delivery time</h3>
+        <h3 className="pb-4 uppercase text-body text-black opacity-40 font-medium">Delivery time</h3>
         <div className="flex gap-2 flex-wrap">
           {deliveryOptions.map((option) => (
             <Tag
@@ -79,7 +83,7 @@ const FilterBar = ({
       </div>
 
       <div className="hidden md:block md:pb-8">
-        <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Price range</h3>
+        <h3 className="pb-4 uppercase text-body text-black opacity-40 font-medium">Price range</h3>
         <div className="flex gap-2 flex-wrap">
           {availablePriceRanges.map((range) => (
             <Tag
