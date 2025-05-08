@@ -22,8 +22,6 @@
   --color-stroke: rgba(0, 0, 0, 0.1);
 
   --font-primary: 'SF Pro', sans-serif;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,7 +34,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
 }
 
 /*Hide scrollbar*/
@@ -54,6 +52,10 @@ body {
 
 .text-display {
   @apply font-primary text-[1.25rem] md:text-[2.5rem] leading-[1] tracking-[-0.03125rem];
+}
+
+.text-heading {
+  @apply font-primary text-[3rem] font-[760] leading-[1];
 }
 
 .text-h1 {

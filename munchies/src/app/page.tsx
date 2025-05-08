@@ -8,6 +8,7 @@ import FilterSlider from "./components/Filter/FilterSlider";
 import Image from "next/image";
 import useFilters from "./hooks/useFilters";
 import useData from "./hooks/useData";
+import MobileOverlay from "./components/MobileOverlay";
 
 export default function Home() {
   const { foodCategories, setFoodCategories, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges } = useFilters();
@@ -28,6 +29,7 @@ export default function Home() {
 
   return (
     <main className="bg-offWhite">
+      <MobileOverlay />
       <div className="pl-6 pt-[40px] md:pl-10 md:pt-14">
         <span className="block h-fit pb-[24px] md:pb-[48px]">
           <Image
