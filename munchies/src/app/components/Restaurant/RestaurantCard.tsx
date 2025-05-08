@@ -4,29 +4,31 @@ import { useState, useEffect } from "react";
 import { fetchOpenStatus } from "../../lib/api";
 import Tag from "../Tag";
 
-const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app";
+const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base URL for image paths
 
+/** RestaurantCard component displays details about a restaurant */
 const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
-  const imageUrl = `${BASE_URL}${restaurant.image_url}`;
-  const [isOpen, setIsOpen] = useState<boolean | null>(null);
+  const imageUrl = `${BASE_URL}${restaurant.image_url}`; // Constructs the full URL for the image
+  const [isOpen, setIsOpen] = useState<boolean | null>(null); // State to track whether the restaurant is open or not
 
+  // useEffect hook to check the restaurant's open status when the component mounts
   useEffect(() => {
     const checkOpenStatus = async () => {
         try {
-          const status = await fetchOpenStatus(restaurant.id);
+          const status = await fetchOpenStatus(restaurant.id); // Fetches the open status from the API
           if (status) {
-            setIsOpen(status.is_open);
+            setIsOpen(status.is_open); // Sets the state based on the fetched status
           }
         } catch (error) {
-          console.error("Error fetching open status:", error);
-          setIsOpen(false); 
+          console.error("Error fetching open status:", error); // Handles any errors in the fetching process
+          setIsOpen(false); // If there’s an error, assume the restaurant is closed
         }
       };
       checkOpenStatus();
-  }, [restaurant.id]);
+  }, [restaurant.id]); // Runs when the restaurant.id changes
 
   return (
-    <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-[200px] rounded-[8px] border border-stroke">
+    <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-52 rounded-[8px] border border-stroke">
         {!isOpen && (
             <div className="absolute inset-0 bg-white opacity-90 z-20 flex items-center justify-center">
                 <div className="z-30 py-2 px-3 bg-offWhite border border-stroke rounded-[4px] text-body">Opens tomorrow at 12 pm</div>

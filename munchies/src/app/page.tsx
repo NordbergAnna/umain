@@ -10,6 +10,7 @@ import useData from "./hooks/useData";
 import MobileOverlay from "./components/MobileOverlay";
 
 export default function Home() {
+  // Destructure the states and setters from the `useFilters` hook
   const { 
     foodCategories, 
     setFoodCategories, 
@@ -19,20 +20,20 @@ export default function Home() {
     setPriceRanges 
   } = useFilters();
 
-  const { availableFilters, availablePriceRanges } = useData();
+  const { availableFilters, availablePriceRanges } = useData(); // Fetch available filter options like food categories, delivery time and price ranges
 
-  useSyncFiltersWithURL({ foodCategories, deliveryTimes, priceRanges });
+  useSyncFiltersWithURL({ foodCategories, deliveryTimes, priceRanges }); // Synchronize the filter states with the URL query parameters
 
   return (
     <main className="bg-offWhite">
       <MobileOverlay />
       <div className="pl-6 pt-[40px] md:pl-10 md:pt-14">
-        <span className="block h-fit pb-[24px] md:pb-[48px]">
+        <span className="block h-fit pb-6 md:pb-12">
           <Image
             src="/icons/logo_black.svg"
             alt="Logo"
             fill
-            className="!h-[24px] md:!h-[40px] !w-auto !relative object-contain"
+            className="!h-6 md:!h-10 !w-auto !relative object-contain"
             priority
           />
         </span>
