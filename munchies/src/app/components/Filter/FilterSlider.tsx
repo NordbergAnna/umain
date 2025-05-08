@@ -1,26 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Filter } from "../types";
-import { fetchFilters } from "../lib/api";
+import type { Filter, FilterSliderProps } from "../../types";
+import { fetchFilters } from "../../lib/api";
 import Image from "next/image";
 
 const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app";
 
-type Props = {
-  selectedFilters: string[];
-  setSelectedFilters: (filters: string[]) => void;
-};
-
-const FilterSlider = ({ selectedFilters, setSelectedFilters }: Props) => {
+const FilterSlider = ({ selectedFilters, setSelectedFilters }: FilterSliderProps) => {
     const [filters, setFilters] = useState<Filter[]>([]);
   
     useEffect(() => {
-      const loadFilters = async () => {
+      const fetchFiltersData = async () => {
         const data = await fetchFilters();
         setFilters(data);
       };
-      loadFilters();
+      fetchFiltersData();
     }, []);
   
     const toggleFilter = (id: string) => {

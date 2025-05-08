@@ -1,18 +1,7 @@
 "use client";
 import React from "react";
-import { Filter } from "../types/index";
-import Tag from "./Tag";
-
-type Props = {
-  availableFilters: Filter[];
-  availablePriceRanges: { id: string; range: string }[];
-  selectedFilters: string[];
-  setFilters: (filters: string[]) => void;
-  selectedDeliveryTimes: string[];
-  setDeliveryTimes: (times: string[]) => void;
-  selectedPriceRanges: string[];
-  setPriceRanges: (ranges: string[]) => void;
-};
+import Tag from "../Tag";
+import type { FilterBarProps } from "../../types";
 
 const deliveryOptions = [
   { label: "0-10 min", value: "0-10" },
@@ -24,7 +13,7 @@ const deliveryOptions = [
 const filterClass = "py-[8px] px-[12px] text-body rounded-[8px] border-[0.6px] border-stroke cursor-pointer";
 const selectedFilterClass = "bg-black text-white";
 
-const FilterBar: React.FC<Props> = ({
+const FilterBar: React.FC<FilterBarProps> = ({
   availableFilters,
   availablePriceRanges,
   selectedFilters,

@@ -1,41 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  fetchFilters,
-  fetchAllPriceRanges,
-} from "./lib/api";
-import { Filter } from "./types";
-import FilterBar from "./components/FilterBar";
-import RestaurantList from "./components/RestaurantList";
-import FilterSlider from "./components/FilterSlider";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import FilterBar from "./components/Filter/FilterBar";
+import RestaurantList from "./components/Restaurant/RestaurantList";
+import FilterSlider from "./components/Filter/FilterSlider";
 import Image from "next/image";
+import useFilters from "./hooks/useFilters";
+import useData from "./hooks/useData";
 
 export default function Home() {
+  const { filters, setFilters, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges } = useFilters();
+  const { availableFilters, availablePriceRanges } = useData();
+
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const [filters, setFilters] = useState<string[]>([]);
-  const [deliveryTimes, setDeliveryTimes] = useState<string[]>([]);
-  const [priceRanges, setPriceRanges] = useState<string[]>([]);
-
-  const [availableFilters, setAvailableFilters] = useState<Filter[]>([]);
-  const [availablePriceRanges, setAvailablePriceRanges] = useState<
-    { id: string; range: string }[]
-  >([]);
-
-
-  useEffect(() => {
-    const filterParam = searchParams.get("filters");
-    const deliveryParam = searchParams.get("deliveryTimes");
-    const priceParam = searchParams.get("priceRanges");
-
-    setFilters(filterParam ? filterParam.split(",") : []);
-    setDeliveryTimes(deliveryParam ? deliveryParam.split(",") : []);
-    setPriceRanges(priceParam ? priceParam.split(",") : []);
-  }, [searchParams]);
-
  
   useEffect(() => {
     const params = new URLSearchParams();
@@ -47,19 +25,6 @@ export default function Home() {
     const queryString = params.toString();
     router.replace(`?${queryString}`, { scroll: false });
   }, [filters, deliveryTimes, priceRanges, router]);
-
- 
-  useEffect(() => {
-    const loadData = async () => {
-      const [filterList, priceList] = await Promise.all([
-        fetchFilters(),
-        fetchAllPriceRanges(),
-      ]);
-      setAvailableFilters(filterList);
-      setAvailablePriceRanges(priceList);
-    };
-    loadData();
-  }, []);
 
   return (
     <main className="bg-offWhite">
@@ -91,15 +56,15 @@ export default function Home() {
         <div className="md:grid grid-cols-13 gap-y-10">
           <div className="col-span-13">
             <FilterSlider
-          selectedFilters={filters}
-          setSelectedFilters={setFilters}
+              selectedFilters={filters}
+              setSelectedFilters={setFilters}
             />
           </div>
           <div className="col-span-12">
             <RestaurantList
-          filters={filters}
-          deliveryTimes={deliveryTimes}
-          priceRanges={priceRanges}
+              filters={filters}
+              deliveryTimes={deliveryTimes}
+              priceRanges={priceRanges}
             />
           </div>
         </div>

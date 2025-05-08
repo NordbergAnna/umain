@@ -1,27 +1,32 @@
 import { Restaurant, Filter } from "../types/index";
-
-const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app/api";
+import { BASE_URL } from '../../../config';
 
 export const fetchRestaurants = async (): Promise<Restaurant[]> => {
   const res = await fetch(`${BASE_URL}/restaurants`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch restaurants");
+  }
   const data = await res.json();
   return data.restaurants;
 };
 
 export const fetchFilters = async (): Promise<Filter[]> => {
   const res = await fetch(`${BASE_URL}/filter`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch filters");
+  }
   const data = await res.json();
   return data.filters;
 };
 
 export const fetchOpenStatus = async (restaurantId: string) => {
-    const response = await fetch(
-      `https://work-test-web-2024-eze6j4scpq-lz.a.run.app/api/open/${restaurantId}`
+    const res = await fetch(
+      `${BASE_URL}/open/${restaurantId}`
     );
-    if (!response.ok) {
+    if (!res.ok) {
       throw new Error("Failed to fetch open status");
     }
-    const data = await response.json();
+    const data = await res.json();
     return data;
   };
   
@@ -34,6 +39,9 @@ export const fetchAllPriceRanges = async (): Promise<
   const prices = await Promise.all(
     uniqueIds.map(async (id) => {
       const res = await fetch(`${BASE_URL}/price-range/${id}`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch price ranges");
+      }
       const data = await res.json();
       return { id, range: data.range };
     })
