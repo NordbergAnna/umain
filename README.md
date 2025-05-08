@@ -4,7 +4,11 @@ This is a [Next.js](https://nextjs.org) project created with [`create-next-app`]
 
 ## Getting Started
 
-To start the development server, run:
+Clone the repo
+
+Navigate to munchies folder
+
+To start the development server, run: 
 
 ```bash
 npm run dev
