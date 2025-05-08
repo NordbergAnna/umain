@@ -17,8 +17,8 @@ export interface Restaurant {
   export interface FilterBarProps {
     availableFilters: Filter[];
     availablePriceRanges: { id: string; range: string }[];
-    selectedFilters: string[];
-    setFilters: (filters: string[]) => void;
+    selectedFoodCategories: string[];
+    setFoodCategories: (categories: string[]) => void;
     selectedDeliveryTimes: string[];
     setDeliveryTimes: (times: string[]) => void;
     selectedPriceRanges: string[];
@@ -26,12 +26,12 @@ export interface Restaurant {
   };
 
   export interface FilterSliderProps {
-    selectedFilters: string[];
-    setSelectedFilters: (filters: string[]) => void;
+    selectedFoodCategories: string[];
+    setFoodCategories: (categories: string[]) => void;
   };
 
   export interface RestaurantsListProps {
-    filters: string[];
+    foodCategories: string[];
     deliveryTimes: string[];
     priceRanges: string[];
   }

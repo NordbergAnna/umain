@@ -2,15 +2,15 @@ import { Restaurant } from "../types";
 
 export const filterRestaurants = (
     restaurants: Restaurant[],
-    filters: string[],
+    foodCategories: string[],
     deliveryTimes: string[],
     priceRanges: string[]
   ): Restaurant[] => {
     let filtered = [...restaurants];
   
-    if (filters.length) {
+    if (foodCategories.length) {
       filtered = filtered.filter((r) =>
-        r.filter_ids.some((id) => filters.includes(id))
+        r.filter_ids.some((id) => foodCategories.includes(id))
       );
     }
   

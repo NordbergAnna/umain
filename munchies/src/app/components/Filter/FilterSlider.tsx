@@ -7,43 +7,43 @@ import Image from "next/image";
 
 const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app";
 
-const FilterSlider = ({ selectedFilters, setSelectedFilters }: FilterSliderProps) => {
-    const [filters, setFilters] = useState<Filter[]>([]);
+const FilterSlider = ({ selectedFoodCategories, setFoodCategories }: FilterSliderProps) => {
+    const [categories, setCategories] = useState<Filter[]>([]);
   
     useEffect(() => {
       const fetchFiltersData = async () => {
         const data = await fetchFilters();
-        setFilters(data);
+        setCategories(data);
       };
       fetchFiltersData();
     }, []);
   
     const toggleFilter = (id: string) => {
-      setSelectedFilters(
-        selectedFilters.includes(id)
-          ? selectedFilters.filter((f) => f !== id)
-          : [...selectedFilters, id]
+      setFoodCategories(
+        selectedFoodCategories.includes(id)
+          ? selectedFoodCategories.filter((f) => f !== id)
+          : [...selectedFoodCategories, id]
       );
     }
 
  return (
     <div className="flex gap-x-2.5 overflow-x-scroll whitespace-nowrap hide-scrollbar pr-[24px]">
-    {filters.map((filter) => {
+    {categories.map((category) => {
 
-        const imageUrl = `${BASE_URL}${filter.image_url}`;
-        const isSelected = selectedFilters.includes(filter.id);
-        const isAnySelected = selectedFilters.length > 0;
+        const imageUrl = `${BASE_URL}${category.image_url}`;
+        const isSelected = selectedFoodCategories.includes(category.id);
+        const isAnySelected = selectedFoodCategories.length > 0;
 
         return (
             <button
                 className={`flex justify-between min-w-[160px] h-[80px] bg-white border border-stroke rounded-[8px] cursor-pointer transition-opacity duration-100 ${isAnySelected && !isSelected ? "opacity-50" : "opacity-100"}`}
-                key={filter.id}
-                onClick={() => toggleFilter(filter.id)}
+                key={category.id}
+                onClick={() => toggleFilter(category.id)}
                 >
-                <span className="text-title pl-3 pt-4">{filter.name}</span>
+                <span className="text-title pl-3 pt-4">{category.name}</span>
                 <Image
                     src={imageUrl}
-                    alt={filter.name}
+                    alt={category.name}
                     width={80}
                     height={80}
                 />

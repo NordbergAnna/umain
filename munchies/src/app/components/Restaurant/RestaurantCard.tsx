@@ -14,7 +14,6 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
     const checkOpenStatus = async () => {
         try {
           const status = await fetchOpenStatus(restaurant.id);
-  
           if (status) {
             setIsOpen(status.is_open);
           }
@@ -23,7 +22,6 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
           setIsOpen(false); 
         }
       };
-  
       checkOpenStatus();
   }, [restaurant.id]);
 

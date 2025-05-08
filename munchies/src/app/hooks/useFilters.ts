@@ -4,21 +4,21 @@ import { useSearchParams } from "next/navigation";
 const useFilters = () => {
   const searchParams = useSearchParams();
 
-  const [filters, setFilters] = useState<string[]>([]);
+  const [foodCategories, setFoodCategories] = useState<string[]>([]);
   const [deliveryTimes, setDeliveryTimes] = useState<string[]>([]);
   const [priceRanges, setPriceRanges] = useState<string[]>([]);
 
   useEffect(() => {
-    const filterParam = searchParams.get("filters");
+    const categoryParam = searchParams.get("foodCategories")
     const deliveryParam = searchParams.get("deliveryTimes");
     const priceParam = searchParams.get("priceRanges");
 
-    setFilters(filterParam ? filterParam.split(",") : []);
+    setFoodCategories(categoryParam ? categoryParam.split(",") : []);
     setDeliveryTimes(deliveryParam ? deliveryParam.split(",") : []);
     setPriceRanges(priceParam ? priceParam.split(",") : []);
   }, [searchParams]);
 
-  return { filters, setFilters, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges };
+  return { foodCategories, setFoodCategories, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges };
 };
 
 export default useFilters;

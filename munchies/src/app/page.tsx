@@ -10,7 +10,7 @@ import useFilters from "./hooks/useFilters";
 import useData from "./hooks/useData";
 
 export default function Home() {
-  const { filters, setFilters, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges } = useFilters();
+  const { foodCategories, setFoodCategories, deliveryTimes, setDeliveryTimes, priceRanges, setPriceRanges } = useFilters();
   const { availableFilters, availablePriceRanges } = useData();
 
   const router = useRouter();
@@ -18,13 +18,13 @@ export default function Home() {
   useEffect(() => {
     const params = new URLSearchParams();
 
-    if (filters.length) params.set("filters", filters.join(","));
+    if (foodCategories.length) params.set("foodCategories", foodCategories.join(","));
     if (deliveryTimes.length) params.set("deliveryTimes", deliveryTimes.join(","));
     if (priceRanges.length) params.set("priceRanges", priceRanges.join(","));
 
     const queryString = params.toString();
     router.replace(`?${queryString}`, { scroll: false });
-  }, [filters, deliveryTimes, priceRanges, router]);
+  }, [foodCategories, deliveryTimes, priceRanges, router]);
 
   return (
     <main className="bg-offWhite">
@@ -44,8 +44,8 @@ export default function Home() {
         <FilterBar
           availableFilters={availableFilters}
           availablePriceRanges={availablePriceRanges}
-          selectedFilters={filters}
-          setFilters={setFilters}
+          selectedFoodCategories={foodCategories}
+          setFoodCategories={setFoodCategories}
           selectedDeliveryTimes={deliveryTimes}
           setDeliveryTimes={setDeliveryTimes}
           selectedPriceRanges={priceRanges}
@@ -56,13 +56,13 @@ export default function Home() {
         <div className="md:grid grid-cols-13 gap-y-10">
           <div className="col-span-13">
             <FilterSlider
-              selectedFilters={filters}
-              setSelectedFilters={setFilters}
+              selectedFoodCategories={foodCategories}
+              setFoodCategories={setFoodCategories}
             />
           </div>
           <div className="col-span-12">
             <RestaurantList
-              filters={filters}
+              foodCategories={foodCategories}
               deliveryTimes={deliveryTimes}
               priceRanges={priceRanges}
             />

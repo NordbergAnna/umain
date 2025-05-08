@@ -5,7 +5,7 @@ import RestaurantCard from "./RestaurantCard";
 import { filterRestaurants } from "@/app/hooks/filterUtils";
 import type { RestaurantsListProps } from "../../types";
 
-const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsListProps) => {
+const RestaurantsList = ({ foodCategories, deliveryTimes, priceRanges }: RestaurantsListProps) => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [allRestaurants, setAllRestaurants] = useState<Restaurant[]>([]);
 
@@ -18,9 +18,9 @@ const RestaurantsList = ({ filters, deliveryTimes, priceRanges }: RestaurantsLis
   }, []);
 
   useEffect(() => {
-    const filtered = filterRestaurants(allRestaurants, filters, deliveryTimes, priceRanges);
+    const filtered = filterRestaurants(allRestaurants, foodCategories, deliveryTimes, priceRanges);
     setRestaurants(filtered);
-  }, [filters, deliveryTimes, priceRanges, allRestaurants]);
+  }, [foodCategories, deliveryTimes, priceRanges, allRestaurants]);
 
   return (
     <div className="col-span-12 max-md:pr-6 max-md:pb-[40px] max-md:mt-6">

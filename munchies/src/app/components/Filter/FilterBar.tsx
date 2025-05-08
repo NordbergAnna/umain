@@ -16,18 +16,18 @@ const selectedFilterClass = "bg-black text-white";
 const FilterBar: React.FC<FilterBarProps> = ({
   availableFilters,
   availablePriceRanges,
-  selectedFilters,
-  setFilters,
+  selectedFoodCategories,
+  setFoodCategories,
   selectedDeliveryTimes,
   setDeliveryTimes,
   selectedPriceRanges,
   setPriceRanges,
 }) => {
   const toggleFilter = (id: string) => {
-    setFilters(
-      selectedFilters.includes(id)
-        ? selectedFilters.filter((f) => f !== id)
-        : [...selectedFilters, id]
+    setFoodCategories(
+      selectedFoodCategories.includes(id)
+        ? selectedFoodCategories.filter((f) => f !== id)
+        : [...selectedFoodCategories, id]
     );
   };
 
@@ -54,12 +54,12 @@ const FilterBar: React.FC<FilterBarProps> = ({
       <div className="hidden md:block md:pb-8">
         <h3 className="pb-4 uppercase text-body text-black opacity-40 font-[500]">Food category</h3>
         <div className="block">
-          {availableFilters.slice(0, 4).map((filter) => (
+          {availableFilters.slice(0, 4).map((category) => (
             <Tag
-              key={filter.id}
-              title={filter.name}
-              onClick={() => toggleFilter(filter.id)}
-              className={`${filterClass} ${selectedFilters.includes(filter.id) ? selectedFilterClass : ""} md:mb-2.5`}
+              key={category.id}
+              title={category.name}
+              onClick={() => toggleFilter(category.id)}
+              className={`${filterClass} ${selectedFoodCategories.includes(category.id) ? selectedFilterClass : ""} md:mb-2.5`}
             />
           ))}
         </div>
