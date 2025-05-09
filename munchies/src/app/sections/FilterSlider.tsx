@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Filter, FilterSliderProps } from "../../types";
-import { fetchFilters } from "../../lib/api";
+import type { Filter, FilterSliderProps } from "../types";
+import { fetchFilters } from "../lib/api";
 import Image from "next/image";
 
 const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base URL for image paths

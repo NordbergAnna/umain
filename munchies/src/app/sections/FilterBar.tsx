@@ -1,6 +1,6 @@
 "use client";
-import Tag from "../Tag";
-import type { FilterBarProps } from "../../types";
+import Tag from "../components/Tag";
+import type { FilterBarProps } from "../types";
 import { deliveryOptions } from "@/app/lib/constants";
 
 const filterClass =

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Restaurant } from "../../types";
-import { fetchRestaurants } from "../../lib/api";
-import RestaurantCard from "./RestaurantCard";
+import { Restaurant } from "../types";
+import { fetchRestaurants } from "../lib/api";
+import RestaurantCard from "../components/RestaurantCard";
 import { filterRestaurants } from "@/app/hooks/filterUtils";
-import type { RestaurantsListProps } from "../../types";
+import type { RestaurantsListProps } from "../types";
 
 /** Functional component to display a list of restaurants based on filters */
 const RestaurantsList = ({

@@ -1,8 +1,8 @@
 "use client";
 
-import FilterBar from "./components/Filter/FilterBar";
-import RestaurantList from "./components/Restaurant/RestaurantList";
-import FilterSlider from "./components/Filter/FilterSlider";
+import FilterBar from "./sections/FilterBar";
+import RestaurantList from "./sections/RestaurantList";
+import FilterSlider from "./sections/FilterSlider";
 import Image from "next/image";
 import useFilters from "./hooks/useFilters";
 import useSyncFiltersWithURL from "./hooks/useSyncFiltersWithUrl";

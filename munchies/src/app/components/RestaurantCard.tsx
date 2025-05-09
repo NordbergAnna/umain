@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Restaurant } from "../../types";
+import { Restaurant } from "../types";
 import { useState, useEffect } from "react";
-import { fetchOpenStatus } from "../../lib/api";
-import Tag from "../Tag";
-import { deliveryOptions } from "../../lib/constants";
+import { fetchOpenStatus } from "../lib/api";
+import Tag from "./Tag";
+import { deliveryOptions } from "../lib/constants";
 
 const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base URL for image paths
 
