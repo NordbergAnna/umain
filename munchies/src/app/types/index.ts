@@ -8,6 +8,7 @@ export interface Restaurant {
   image_url: string;
   delivery_time_minutes: number;
   price_range_id: string;
+  isOpen?: boolean;
 }
 
 export interface Filter {

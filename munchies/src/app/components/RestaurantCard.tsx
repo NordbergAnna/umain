@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { Restaurant } from "../types";
-import { useState, useEffect } from "react";
-import { fetchOpenStatus } from "../lib/api";
 import Tag from "./Tag";
 import { deliveryOptions } from "../lib/constants";
 
@@ -9,8 +7,8 @@ const BASE_URL = "https://work-test-web-2024-eze6j4scpq-lz.a.run.app"; // Base U
 
 /** RestaurantCard component displays details about a restaurant */
 const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
-  const imageUrl = `${BASE_URL}${restaurant.image_url}`; // Constructs the full URL for the image
-  const [isOpen, setIsOpen] = useState<boolean | null>(null); // State to track whether the restaurant is open or not
+const imageUrl = `${BASE_URL}${restaurant.image_url}`; // Constructs the full URL for the image
+const isOpen = restaurant.isOpen; // Determines if the restaurant is open
 
   // Function to get the delivery time label based on the delivery time in minutes
   const getDeliveryTimeLabel = (minutes: number): string => {
@@ -19,22 +17,6 @@ const RestaurantCard = ({ restaurant }: { restaurant: Restaurant }) => {
     );
     return option ? option.label : `${minutes} min`;
   };
-
-  // useEffect hook to check the restaurant's open status when the component mounts
-  useEffect(() => {
-    const checkOpenStatus = async () => {
-      try {
-        const status = await fetchOpenStatus(restaurant.id); // Fetches the open status from the API
-        if (status) {
-          setIsOpen(status.is_open); // Sets the state based on the fetched status
-        }
-      } catch (error) {
-        console.error("Error fetching open status:", error); // Handles any errors in the fetching process
-        setIsOpen(false); // If there’s an error, assume the restaurant is closed
-      }
-    };
-    checkOpenStatus();
-  }, [restaurant.id]); // Runs when the restaurant.id changes
 
   return (
     <div className="relative overflow-hidden flex flex-col justify-between bg-white min-h-52 rounded-lg border border-stroke">
