@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Restaurant } from "../types";
-import { fetchRestaurants } from "../lib/api";
+import { fetchRestaurants, fetchOpenStatus } from "../lib/api";
 import RestaurantCard from "../components/RestaurantCard";
 import { filterRestaurants } from "@/app/hooks/filterUtils";
 import type { RestaurantsListProps } from "../types";
@@ -20,7 +20,22 @@ const RestaurantsList = ({
     const loadRestaurants = async () => {
       setLoading(true); // Set loading to true while fetching
       const resList = await fetchRestaurants(); // Fetch the restaurant data from the API and update the state
-      setAllRestaurants(resList);
+
+      // Fetch the open status for each restaurant in parallel
+      // This is done using Promise.all to ensure all requests are completed before updating the state
+      const resWithStatus = await Promise.all(
+        resList.map(async (restaurant) => {
+          try {
+            const status = await fetchOpenStatus(restaurant.id);
+            return { ...restaurant, isOpen: status?.is_open ?? false };
+          } catch (err) {
+            console.error("Error fetching open status:", err);
+            return { ...restaurant, isOpen: false };
+          }
+        })
+      );
+
+      setAllRestaurants(resWithStatus); // Update the state with the full list of restaurants
       setLoading(false); // Set loading to false after fetching
     };
     loadRestaurants(); // Trigger the async function to load restaurants
@@ -34,7 +49,13 @@ const RestaurantsList = ({
       deliveryTimes,
       priceRanges
     ); // Apply the filters to the full list of restaurants
-    setRestaurants(filtered); // Update the restaurants state with the filtered list
+
+    // Sort the filtered list to show open restaurants first
+    const sorted = filtered.sort(
+      (a, b) => (b.isOpen ? 1 : 0) - (a.isOpen ? 1 : 0)
+    );
+
+    setRestaurants(sorted); // Update the state with the filtered and sorted list
   }, [foodCategories, deliveryTimes, priceRanges, allRestaurants]); // Runs when filters or the list of all restaurants change
 
   return (
